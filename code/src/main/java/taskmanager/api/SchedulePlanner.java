@@ -1,9 +1,9 @@
 package taskmanager.api;
 
 
-import reactor.core.publisher.Mono;
-
 import java.util.List;
+
+import reactor.core.publisher.Mono;
 
 public interface SchedulePlanner {
 
@@ -16,4 +16,4 @@ public interface SchedulePlanner {
             String location);
 }
 
-record ScheduleRecommendation(Task task, String recommendation) {}
+// record ScheduleRecommendation(Task task, String recommendation) {}

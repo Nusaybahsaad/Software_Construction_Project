@@ -33,5 +33,11 @@ public class MainApp {
         // Wire this to the Swing UI
         SmartTaskManagerFrame frame = new SmartTaskManagerFrame(tm);
         javax.swing.SwingUtilities.invokeLater(() -> frame.setVisible(true));
+
+        try {
+                Thread.currentThread().join();
+        } catch (InterruptedException e) {
+                System.out.println("Main thread interrupted, exiting.");
+}
     }
 }

@@ -1,0 +1,5 @@
+taskmanager\api\DefaultSchedulePlanner.class
+taskmanager\api\DefaultTaskManagerBuilder.class
+taskmanager\api\WeatherService.class
+taskmanager\api\DefaultTaskManager.class
+taskmanager\api\DefaultTaskService.class
