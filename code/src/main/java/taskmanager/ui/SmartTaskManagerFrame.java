@@ -65,7 +65,11 @@ public class SmartTaskManagerFrame extends JFrame {
     private final JButton recommendButton;
 
     private final String[] columnNames = {"ID", "Title", "Due Time", "Weather Sensitive", "Status"};
-
+    /**
+     * Initializes the frame with the given TaskManager, sets up the UI components, and wires event handlers.
+     * @param taskManager The TaskManager instance to use for data operations. Must be an
+     * instance of DefaultTaskManager to access the TaskService for add/edit/delete operations.
+     */
     public SmartTaskManagerFrame(TaskManager taskManager) {
         this.taskManager = taskManager;
         this.taskService = ((DefaultTaskManager) taskManager).getTaskService();
@@ -166,7 +170,10 @@ public class SmartTaskManagerFrame extends JFrame {
             tableModel.addRow(new Object[]{t.getId(), t.getTitle(), t.getDueDateTime(), t.isWeatherSensitive(), "N/A"});
         }
     }
-
+    /**
+     * Fetches weather for the task's location (fixed as "Jeddah" here) and updates the "Status" column based on precipitation probability.
+     * @param taskId The ID of the task to update weather for.  
+     */
     private void updateWeatherForTask(String taskId) {
         Mono<WeatherForecast> forecastMono = taskManager.fetchWeather("Jeddah");  // fixed city
 
@@ -186,7 +193,11 @@ public class SmartTaskManagerFrame extends JFrame {
                 }))
                 .subscribe();
     }
-
+    /**
+     * Updates the "Status" column for the task with the given ID in the table.
+     * @param taskId The ID of the task to update.
+     * @param status The new status string to display.
+     */
     private void updateTaskStatusInTable(String taskId, String status) {
         int rowCount = tableModel.getRowCount();
         for (int i = 0; i < rowCount; i++) {
