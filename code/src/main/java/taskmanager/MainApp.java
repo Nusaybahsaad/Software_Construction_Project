@@ -1,7 +1,9 @@
-package taskmanager.api;
-
-
+package taskmanager;
 import java.time.LocalDateTime;
+
+import taskmanager.api.TaskManager;
+import taskmanager.model.Task;
+import taskmanager.ui.SmartTaskManagerFrame;
 
 public class MainApp {
 
@@ -36,6 +38,7 @@ public class MainApp {
 
         try {
                 Thread.currentThread().join();
+                
         } catch (InterruptedException e) {
                 System.out.println("Main thread interrupted, exiting.");
 }

@@ -1,5 +1,4 @@
-package taskmanager.api;
-
+package taskmanager.model;
 
 /**
  * A single suggested schedule entry for one task.

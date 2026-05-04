@@ -1,8 +1,12 @@
-package taskmanager.api;
-
-import reactor.core.publisher.Mono;
+package taskmanager.impl;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import reactor.core.publisher.Mono;
+import taskmanager.api.SchedulePlanner;
+import taskmanager.model.ScheduleRecommendation;
+import taskmanager.model.Task;
+import taskmanager.model.WeatherForecast;
 
 /**
  * This class implements the SchedulePlanner interface.

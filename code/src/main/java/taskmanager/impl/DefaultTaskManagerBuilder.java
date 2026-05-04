@@ -1,4 +1,7 @@
-package taskmanager.api;
+package taskmanager.impl;
+import taskmanager.api.SchedulePlanner;
+import taskmanager.api.TaskManager;
+import taskmanager.service.WeatherService;
 
 /**
  * This class is a builder for TaskManager.

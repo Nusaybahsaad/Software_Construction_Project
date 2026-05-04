@@ -1,12 +1,15 @@
-package taskmanager.api;
-
-import reactor.core.publisher.Mono;
-import reactor.core.scheduler.Schedulers;
+package taskmanager.service;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+
 import org.json.JSONObject;
+
+import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Schedulers;
+import taskmanager.exception.WeatherAPIException;
+import taskmanager.model.WeatherForecast;
 
 /**
  * Service responsible for communicating with the OpenWeatherMap REST API.

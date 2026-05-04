@@ -1,9 +1,10 @@
 package taskmanager.api;
-
-
 import java.util.List;
 
 import reactor.core.publisher.Mono;
+import taskmanager.model.ScheduleRecommendation;
+import taskmanager.model.Task;
+import taskmanager.model.WeatherForecast;
 
 public interface SchedulePlanner {
 
@@ -16,4 +17,4 @@ public interface SchedulePlanner {
             String location);
 }
 
-// record ScheduleRecommendation(Task task, String recommendation) {}
+//record ScheduleRecommendation(Task task, String recommendation) {}

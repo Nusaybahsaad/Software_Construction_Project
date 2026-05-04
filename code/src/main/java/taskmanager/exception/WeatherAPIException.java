@@ -1,4 +1,4 @@
-package taskmanager.api;
+package taskmanager.exception;
 
 public class WeatherAPIException extends RuntimeException {
     public WeatherAPIException(String message, Throwable cause) {

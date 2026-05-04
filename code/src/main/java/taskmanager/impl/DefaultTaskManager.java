@@ -1,8 +1,14 @@
-package taskmanager.api;
+package taskmanager.impl;
 
 import java.util.List;
 
 import reactor.core.publisher.Mono;
+import taskmanager.api.SchedulePlanner;
+import taskmanager.api.TaskManager;
+import taskmanager.model.ScheduleRecommendation;
+import taskmanager.model.Task;
+import taskmanager.model.WeatherForecast;
+import taskmanager.service.WeatherService;
 
 /**
  * The main Facade implementation of the TaskManager interface.

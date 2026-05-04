@@ -1,4 +1,4 @@
-package taskmanager.api;
+package taskmanager.exception;
 
 public class InvalidTaskException extends RuntimeException {
     public InvalidTaskException(String message) {

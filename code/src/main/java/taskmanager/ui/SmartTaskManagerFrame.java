@@ -1,4 +1,4 @@
-package taskmanager.api;
+package taskmanager.ui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -24,6 +24,15 @@ import javax.swing.table.DefaultTableModel;
 
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
+import taskmanager.api.SchedulePlanner;
+import taskmanager.api.TaskManager;
+import taskmanager.api.TaskService;
+import taskmanager.exception.InvalidTaskException;
+import taskmanager.exception.TaskNotFoundException;
+import taskmanager.impl.DefaultTaskManager;
+import taskmanager.model.ScheduleRecommendation;
+import taskmanager.model.Task;
+import taskmanager.model.WeatherForecast;
 
 /**
  * A Swing-based UI for the TaskManager application. 
