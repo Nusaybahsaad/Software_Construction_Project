@@ -7,59 +7,61 @@ import taskmanager.api.SchedulePlanner;
 import taskmanager.model.ScheduleRecommendation;
 import taskmanager.model.Task;
 import taskmanager.model.WeatherForecast;
-
 /**
- * This class implements the SchedulePlanner interface.
- * Its main job is to check tasks against weather conditions and give advice.
+ * This class handles the logic for suggesting task schedules
+ * based on weather conditions.
  */
 public class DefaultSchedulePlanner implements SchedulePlanner {
 
     /**
-     * This method takes a list of tasks and the weather forecast to suggest recommendations.
+     * Analyzes tasks and provides weather advice.
      * 
-     * Preconditions: The tasks list and forecast object should not be null.
-     * Postconditions: Returns a list of tasks paired with weather advice.
+     * Preconditions: The tasks list and forecast must not be null.
+     * Postconditions: Returns a list of recommendations for all input tasks.
      * 
-     * @param tasks The tasks to check.
-     * @param forecast The weather information.
-     * @return A Mono list of recommendations.
+     * @param tasks    The list of tasks to analyze.
+     * @param forecast The weather data.
+     * @return A Mono containing the list of advice.
      */
     @Override
     public Mono<List<ScheduleRecommendation>> suggestSchedule(List<Task> tasks, WeatherForecast forecast) {
-        
-        // We use Mono.fromCallable to make the processing asynchronous
+
         return Mono.fromCallable(() -> {
             return tasks.stream()
-                .map(task -> {
-                    String advice;
-                    
-                    // Check if the task is weather-sensitive and if there is high rain probability
-                    if (task.isWeatherSensitive() && forecast.getPrecipitationProbability() > 0.5) {
-                        advice = "⚠️ Warning: High chance of rain (" + 
-                                 (forecast.getPrecipitationProbability() * 100) + 
-                                 "%). It's better to delay this task.";
-                    } 
-                    // Check if the task is weather-sensitive and if it's too hot
-                    else if (task.isWeatherSensitive() && forecast.getTemperatureCelsius() > 40.0) {
-                        advice = "🔥 Alert: Extreme heat (" + 
-                                 forecast.getTemperatureCelsius() + 
-                                 "°C). Stay safe and stay indoors.";
-                    } 
-                    else {
-                        advice = "✅ The weather looks good for this task.";
-                    }
-                    
-                    return new ScheduleRecommendation(task, advice);
-                })
-                .collect(Collectors.toList());
+                    .map(task -> {
+                        String advice;
+
+                        if (task.isWeatherSensitive() && forecast.getPrecipitationProbability() > 0.5) {
+                            advice = "⚠️ Warning: High chance of rain (" +
+                                    (forecast.getPrecipitationProbability() * 100) +
+                                    "%). It's better to delay this task.";
+                        } else if (task.isWeatherSensitive() && forecast.getTemperatureCelsius() > 40.0) {
+                            advice = "🔥 Alert: Extreme heat (" +
+                                    forecast.getTemperatureCelsius() +
+                                    "°C). Stay safe and stay indoors.";
+                        } else {
+                            advice = "✅ The weather looks good for this task.";
+                        }
+
+                        return new ScheduleRecommendation(task, advice);
+                    })
+                    .collect(Collectors.toList());
         });
     }
 
     /**
-     * This feature is not implemented here as it needs the API connection first.
+     * Preconditions: Location name must not be empty.
+     * Postconditions: Always returns an error because this is handled by
+     * TaskManager.
+     * 
+     * @param tasks    List of tasks.
+     * @param location City name.
+     * @return A Mono error.
+     * @throws UnsupportedOperationException To signal that TaskManager should be
+     *                                       used.
      */
     @Override
     public Mono<List<ScheduleRecommendation>> suggestScheduleForLocation(List<Task> tasks, String location) {
-        return Mono.error(new UnsupportedOperationException("Needs API connection."));
+        return Mono.error(new UnsupportedOperationException("Use TaskManager for this."));
     }
 }

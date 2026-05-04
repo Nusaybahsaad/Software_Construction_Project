@@ -11,8 +11,8 @@ import taskmanager.model.WeatherForecast;
 import taskmanager.service.WeatherService;
 
 /**
- * The main Facade implementation of the TaskManager interface.
- * It coordinates between TaskService, WeatherService, and SchedulePlanner.
+ * The main manager that connects the Task Service, Weather Service, and
+ * Planner.
  */
 public class DefaultTaskManager implements TaskManager {
 
@@ -28,16 +28,39 @@ public class DefaultTaskManager implements TaskManager {
         this.planner = planner;
     }
 
+    /**
+     * Adds a task to the system.
+     * 
+     * Preconditions: Task object must not be null.
+     * Postconditions: Task is saved in the system.
+     * Side-effects: Changes the internal task list state.
+     * 
+     * @param task The task to add.
+     */
     @Override
     public void addTask(Task task) {
         taskService.addTask(task).subscribe();
     }
 
+    /**
+     * Preconditions: taskId must exist in the system.
+     * Postconditions: Task is removed from the system.
+     * Side-effects: Changes the internal task list state.
+     * 
+     * @param taskId ID of the task to delete.
+     */
     @Override
     public void removeTask(String taskId) {
         taskService.removeTask(taskId).subscribe();
     }
 
+    /**
+     * Preconditions: None.
+     * Postconditions: Returns all current tasks.
+     * Thread-safety: Uses block() to safely return data to the UI thread.
+     * 
+     * @return List of tasks.
+     */
     @Override
     public List<Task> getTasks() {
         // block() is used here to bridge the reactive service with the synchronous
@@ -61,11 +84,14 @@ public class DefaultTaskManager implements TaskManager {
     }
 
     /**
-     * This is the main reactive pipeline that connects weather fetching
-     * with schedule planning.
+     * Connects weather and planning logic.
      * 
-     * @param location The city name to check.
-     * @return A Mono list of smart recommendations.
+     * Preconditions: Location must be a valid city name.
+     * Postconditions: Returns smart advice for all tasks.
+     * Side-effects: Calls external Weather API.
+     * 
+     * @param location City name.
+     * @return A Mono list of recommendations.
      */
     public Mono<List<ScheduleRecommendation>> getSmartRecommendations(String location) {
         // Step 1: Call the weather service (Work of Member 1)

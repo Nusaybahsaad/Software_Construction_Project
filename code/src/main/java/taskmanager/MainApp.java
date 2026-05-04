@@ -10,7 +10,7 @@ public class MainApp {
     public static void main(String[] args) {
         // Build the TaskManager (students will implement DefaultTaskManager)
         TaskManager tm = TaskManager.builder()
-                .withWeatherApiKey("YOUR_API_KEY_HERE")
+                .withWeatherApiKey("37af483a0484d5697761139b6b392727")
                 .build();
 
         // Add a couple of test tasks
