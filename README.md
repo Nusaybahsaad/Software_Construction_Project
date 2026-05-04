@@ -21,7 +21,7 @@ Replace the placeholder with your actual key:
 
 Java
 TaskManager tm = TaskManager.builder()
-        .withWeatherApiKey("37af483a0484d5697761139b6b392727") // Replace with your key
+        .withWeatherApiKey("your API key") // Replace with your key
         .build();
 
 3. Code Example: Using TaskManager
